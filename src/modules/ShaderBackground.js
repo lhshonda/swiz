@@ -12,12 +12,12 @@ export class ShaderBackground {
       iResolution: {
         value: new THREE.Vector3(window.innerWidth, window.innerHeight, 1), // 3D vector representing the viewport (height, width, aspect ratio)
       }, // making the shader calcs resolution independent 
-      uComplexity: { value: 3 }, // main pattern frequency
-      uSpeed: { value: 0.5 }, // animation speed
-      uColorTwist: { value: 0.5 }, // rgb patterns
-      uDetailIntensity: { value: 0.2 }, // higher = more detail
+      uComplexity: { value: 10 }, // main pattern frequency
+      uSpeed: { value: 0.2 }, // animation speed
+      uColorTwist: { value: 1.0 }, // rgb patterns
+      uDetailIntensity: { value: 6.5 }, // higher = more detail
       uHighlightThreshold: { value: 0.3 }, // the highlight mask 
-      uHighlightReduction: { value: 0.7 }, // dims the highlights 0.5 makes them 50% as bright
+      uHighlightReduction: { value: 0.0 }, // dims the highlights 0.5 makes them 50% as bright
       uBrightness: { value: 1.0 }, // global brightness evaluated at the end
     };
 
@@ -38,7 +38,7 @@ export class ShaderBackground {
       //: function to create the flowing wave pattern
       float pattern(vec2 uv, float time, vec2 freq, float twist) {
         float wave1 = sin(uv.x * freq.x + time + twist);
-        float wave2 = cos(uv.y * freq.y + time + twist);
+        float wave2 = tan(uv.y * freq.y + time + twist);
         return 0.5 + 0.5 * wave1 * wave2;
       }
 
